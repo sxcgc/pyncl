@@ -7,16 +7,12 @@ source:
 
 requirements:
   build:
-    - python
-    - pynio
-    - pyngl
-    - numpy
+    - python>=3.6
+    - numpy>=1.17.4
 
   run:
-    - python
-    - pynio
-    - pyngl
-    - numpy
+    - python>=3.6
+    - numpy>=1.17.4
 
 test:
   imports:
