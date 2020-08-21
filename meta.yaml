@@ -3,18 +3,18 @@ package:
   version: !!str 0.1
 
 source:
-  path: ../src
+  path: ./src
 
 requirements:
   build:
-    - python>=3.6
-    - numpy>=1.17.4
+    - python
+    - numpy
 
   run:
-    - python>=3.6
-    - numpy>=1.17.4
+    - python
+    - numpy
 
-test:
-  imports:
-    - NglLib
+#test:
+#  imports:
+#    - NglLib
 
