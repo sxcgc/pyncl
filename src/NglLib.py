@@ -32,14 +32,29 @@
 # 作用：修改contour map的标尺
 #
 import Ngl
+import Nio
+import sys
 import numpy as np
 import datetime
+
+CONDA_PATH = sys.path[1].split("/lib/")[0]
+
+def sayhello():
+  print("hello world")
+
+def printTibetPath():
+    print(CONDA_PATH+"/share/")
 
 def nameAsTime():
   time = datetime.datetime.now()
   s = time.strftime("_%Y%m%d")
   return s
 
+def Tibet():
+    shpf
+    plres = Ngl.Resources()
+    plres.gsLineColor = "Black"
+    plres.gsSegments = segments
 
 def justMapLabel(wks,plot,lon_values,lat_values):
 
