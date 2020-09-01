@@ -1,0 +1,222 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module cgc_tools ! in 
+    interface  ! in :cgc_tools
+        subroutine multiinout(plat,plon,n,m,qlat,qlon,npts,output) ! in :cgc_tools:sub.f
+            double precision dimension(n,m),intent(in) :: plat
+            double precision dimension(n,m),intent(in),depend(n,m) :: plon
+            integer, optional,check(shape(plat,0)==n),depend(plat) :: n=shape(plat,0)
+            integer, optional,check(shape(plat,1)==m),depend(plat) :: m=shape(plat,1)
+            double precision dimension(npts),intent(in) :: qlat
+            double precision dimension(npts),intent(in),depend(npts) :: qlon
+            integer, optional,intent(in),check(len(qlat)>=npts),depend(qlat) :: npts=len(qlat)
+            double precision dimension(n,m),intent(out),depend(n,m) :: output
+        end subroutine multiinout
+        function gcconvex(npts,qlat,qlon) ! in :cgc_tools:sg_tools.f
+            integer, optional,check(len(qlat)>=npts),depend(qlat) :: npts=len(qlat)
+            double precision dimension(npts) :: qlat
+            double precision dimension(npts),depend(npts) :: qlon
+            integer :: gcconvex
+        end function gcconvex
+        function gcinout(plat,plon,qlat,qlon,npts,work) ! in :cgc_tools:sg_tools.f
+            double precision :: plat
+            double precision :: plon
+            double precision dimension(npts) :: qlat
+            double precision dimension(npts),depend(npts) :: qlon
+            integer, optional,check(len(qlat)>=npts),depend(qlat) :: npts=len(qlat)
+            double precision dimension(4,npts),depend(npts) :: work
+            integer :: gcinout
+        end function gcinout
+        function gcdist(lat1,lon1,lat2,lon2) ! in :cgc_tools:sg_tools.f
+            double precision :: lat1
+            double precision :: lon1
+            double precision :: lat2
+            double precision :: lon2
+            double precision :: gcdist
+        end function gcdist
+        function gconarc(plat,plon,lat1,lon1,lat2,lon2,tol) ! in :cgc_tools:sg_tools.f
+            double precision :: plat
+            double precision :: plon
+            double precision :: lat1
+            double precision :: lon1
+            double precision :: lat2
+            double precision :: lon2
+            double precision :: tol
+            integer :: gconarc
+        end function gconarc
+        function gcconvert(angle,type_bn) ! in :cgc_tools:sg_tools.f
+            double precision :: angle
+            character*(*) :: type_bn
+            double precision :: gcconvert
+        end function gcconvert
+        subroutine gcinterp(lat1,lon1,lat2,lon2,npts,olat,olon) ! in :cgc_tools:sg_tools.f
+            double precision :: lat1
+            double precision :: lon1
+            double precision :: lat2
+            double precision :: lon2
+            integer, optional,check(len(olat)>=npts),depend(olat) :: npts=len(olat)
+            double precision dimension(npts) :: olat
+            double precision dimension(npts),depend(npts) :: olon
+        end subroutine gcinterp
+        function gcqarea(lat1,lon1,lat2,lon2,lat3,lon3,lat4,lon4,ier) ! in :cgc_tools:sg_tools.f
+            double precision :: lat1
+            double precision :: lon1
+            double precision :: lat2
+            double precision :: lon2
+            double precision :: lat3
+            double precision :: lon3
+            double precision :: lat4
+            double precision :: lon4
+            integer :: ier
+            double precision :: gcqarea
+        end function gcqarea
+        function gctarea(lat1,lon1,lat2,lon2,lat3,lon3,ier) ! in :cgc_tools:sg_tools.f
+            double precision :: lat1
+            double precision :: lon1
+            double precision :: lat2
+            double precision :: lon2
+            double precision :: lat3
+            double precision :: lon3
+            integer :: ier
+            double precision :: gctarea
+        end function gctarea
+        function gcpnt2gc(lat1,lon1,lat2,lon2,lat3,lon3) ! in :cgc_tools:sg_tools.f
+            double precision :: lat1
+            double precision :: lon1
+            double precision :: lat2
+            double precision :: lon2
+            double precision :: lat3
+            double precision :: lon3
+            double precision :: gcpnt2gc
+        end function gcpnt2gc
+        function xdpgcdp(aqdp,bqdp,cqdp) ! in :cgc_tools:sg_tools.f
+            double precision dimension(4) :: aqdp
+            double precision dimension(4) :: bqdp
+            double precision dimension(4) :: cqdp
+            double precision :: xdpgcdp
+        end function xdpgcdp
+        function xadgcdp(aqdp,bqdp) ! in :cgc_tools:sg_tools.f
+            double precision dimension(4) :: aqdp
+            double precision dimension(4) :: bqdp
+            double precision :: xadgcdp
+        end function xadgcdp
+        subroutine latlon2cart(lat,lon,x,y,z) ! in :cgc_tools:sg_tools.f
+            double precision :: lat
+            double precision :: lon
+            double precision :: x
+            double precision :: y
+            double precision :: z
+        end subroutine latlon2cart
+        function normang(angle) ! in :cgc_tools:sg_tools.f
+            double precision :: angle
+            double precision :: normang
+        end function normang
+        function gcaangle(lat1,lon1,lat2,lon2,lat3,lon3,lat4,lon4) ! in :cgc_tools:sg_tools.f
+            double precision :: lat1
+            double precision :: lon1
+            double precision :: lat2
+            double precision :: lon2
+            double precision :: lat3
+            double precision :: lon3
+            double precision :: lat4
+            double precision :: lon4
+            double precision :: gcaangle
+        end function gcaangle
+        function gcdangle(lat1,lon1,lat2,lon2,lat3,lon3) ! in :cgc_tools:sg_tools.f
+            double precision :: lat1
+            double precision :: lon1
+            double precision :: lat2
+            double precision :: lon2
+            double precision :: lat3
+            double precision :: lon3
+            double precision :: gcdangle
+        end function gcdangle
+        function angplanes(pts1,pts2) ! in :cgc_tools:sg_tools.f
+            double precision dimension(3,3) :: pts1
+            double precision dimension(3,3) :: pts2
+            double precision :: angplanes
+        end function angplanes
+        subroutine eqnplane(pnt,coef) ! in :cgc_tools:sg_tools.f
+            double precision dimension(3,3) :: pnt
+            double precision dimension(4) :: coef
+        end subroutine eqnplane
+        function xabgcdp(aqdp,bqdp,cqdp) ! in :cgc_tools:sg_tools.f
+            double precision dimension(4) :: aqdp
+            double precision dimension(4) :: bqdp
+            double precision dimension(4) :: cqdp
+            double precision :: xabgcdp
+        end function xabgcdp
+        function icapdp(pqdp,qqdp,npiq) ! in :cgc_tools:sg_tools.f
+            double precision dimension(4) :: pqdp
+            double precision dimension(4,npiq) :: qqdp
+            integer, optional,check(shape(qqdp,1)==npiq),depend(qqdp) :: npiq=shape(qqdp,1)
+            integer :: icapdp
+        end function icapdp
+        function acapdp(pqdp,qqdp,npiq) ! in :cgc_tools:sg_tools.f
+            double precision dimension(4) :: pqdp
+            double precision dimension(4,npiq) :: qqdp
+            integer, optional,check(shape(qqdp,1)==npiq),depend(qqdp) :: npiq=shape(qqdp,1)
+            double precision :: acapdp
+        end function acapdp
+        function gccwise(rlat,rlon,npts) ! in :cgc_tools:sg_tools.f
+            double precision dimension(npts) :: rlat
+            double precision dimension(npts),depend(npts) :: rlon
+            integer, optional,check(len(rlat)>=npts),depend(rlat) :: npts=len(rlat)
+            integer :: gccwise
+        end function gccwise
+        subroutine gproj(phi0,lambda0,phi,lambda,x,y) ! in :cgc_tools:sg_tools.f
+            double precision :: phi0
+            double precision :: lambda0
+            double precision :: phi
+            double precision :: lambda
+            double precision :: x
+            double precision :: y
+        end subroutine gproj
+        subroutine dmapgci(alat,alon,blat,blon,nopi,rlti,rlni) ! in :cgc_tools:dmapgci.f
+            double precision :: alat
+            double precision :: alon
+            double precision :: blat
+            double precision :: blon
+            integer :: nopi
+            double precision dimension(*) :: rlti
+            double precision dimension(*) :: rlni
+        end subroutine dmapgci
+        function dgcdist(rlat1,rlon1,rlat2,rlon2,iu) ! in :cgc_tools:dmapgci.f
+            double precision :: rlat1
+            double precision :: rlon1
+            double precision :: rlat2
+            double precision :: rlon2
+            integer :: iu
+            double precision :: dgcdist
+        end function dgcdist
+        function icfell(messg,nerrf) ! in :cgc_tools:icfell.f
+            character*(*) :: messg
+            integer :: nerrf
+            integer :: ierru
+            integer :: ierrf
+            integer :: irecf
+            integer :: lomsg
+            character*256 :: ermsg
+            integer :: icfell
+            common /secomi/ ierru,ierrf,irecf,lomsg
+            common /secomc/ ermsg
+        end function icfell
+        function icloem(messg) ! in :cgc_tools:icloem.f
+            character*(*) :: messg
+            integer :: icloem
+        end function icloem
+        subroutine eprin ! in :cgc_tools:eprin.f
+            integer :: ierru
+            integer :: ierrf
+            integer :: irecf
+            integer :: lomsg
+            character*256 :: ermsg
+            common /secomi/ ierru,ierrf,irecf,lomsg
+            common /secomc/ ermsg
+        end subroutine eprin
+    end interface 
+end python module cgc_tools
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/

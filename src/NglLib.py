@@ -42,19 +42,32 @@ CONDA_PATH = sys.path[1].split("/lib/")[0]
 def sayhello():
   print("hello world")
 
-def printTibetPath():
-    print(CONDA_PATH+"/share/")
+def TibetPath():
+    return CONDA_PATH+"/share/TPBoundary_3000/TPBoundary_3000.shp"
 
 def nameAsTime():
   time = datetime.datetime.now()
   s = time.strftime("_%Y%m%d")
   return s
 
-def Tibet():
-    shpf
+def TibetOutLine():
+    shpf = Nio.open_file(TibetPath())
+    lon = np.ravel(shpf.variables["x"][:])
+    lat = np.ravel(shpf.variables["y"][:])
+    segments = shpf.variables["segments"][:,0]
+    return (lon,lat,segments)
+
+def Tibet(wks,plot,color = "black"):
+    shpf = Nio.open_file(TibetPath())
+    lon = np.ravel(shpf.variables["x"][:])
+    lat = np.ravel(shpf.variables["y"][:])
+    segments = shpf.variables["segments"][:,0]
     plres = Ngl.Resources()
-    plres.gsLineColor = "Black"
+    plres.gsLineColor = color
     plres.gsSegments = segments
+    return Ngl.add_polyline(wks,plot,lon,lat,plres)
+
+
 
 def justMapLabel(wks,plot,lon_values,lat_values):
 
